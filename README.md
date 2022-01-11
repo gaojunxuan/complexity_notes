@@ -1,6 +1,6 @@
 # Notes on Theory of Computation, Computability, and Complexity
 
-These notes cover topics commonly taught in an undergraduate introductory algorithm courses. They are loosely based on the lectures from CSC373 at the University of Toronto. I also consulted various sources when making those notes. See more in the bibliography section of the notes.
+These notes cover topics commonly taught in an undergraduate theory of computation or complexity theory course. They are loosely based on the lectures from CSC463 at the University of Toronto. I also consulted various sources when making those notes. See more in the bibliography section of the notes.
 
 ## Topics Covered
 
