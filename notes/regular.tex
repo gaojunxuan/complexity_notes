@@ -1,0 +1,39 @@
+\section{Alphabet and Strings}
+
+$\Sigma$ denotes a finite alphabet of symbols. $\Sigma^*$ denotes a set of all strings, including the empty string $\epsilon$, consist of elements of $\Sigma$.
+
+For string $x \in \Sigma^*$, $|x|$ is the length of $x$. A language is a subset of $\Sigma^*$.
+
+\section{Regular Language}
+
+See 240 notes.
+
+Example: $\\mathrm{Even} = \{ w \in \{0,1\}^* \mid \text{$w$ contains an even number of 1's}\}$. It can be expressed using the regular expression $0^* + (0^*10^*10^*)^*$.
+
+It also has a 2-state deterministic finite automaton that decides the language $\mathsf{Even}$.
+\begin{center}
+    \begin{tikzpicture}
+    \node[state,initial,accepting] (qeven) {\( q_{even} \)};
+    \node[state] (qodd) [right=of qeven] {\( q_{odd} \)};
+    \path[->] (qeven) edge [above,bend left=20] node {1} (qodd);
+    \path[->] (qodd) edge [below,bend left=20] node {1} (qeven);
+    \path[->] (qeven) edge [loop above] node {0} (qeven);
+    \path[->] (qodd) edge [loop above] node {0} (qodd);
+    \end{tikzpicture}
+\end{center}
+
+More formally,
+\begin{definition}[Deterministic Finite State Automata]
+    A deterministic finite state automaton (DFA) is a quintuple (5-tuple)
+    $$
+    M = (Q,\Sigma,\delta,s,F)
+    $$
+    where
+    \begin{itemize}
+        \item $Q$ is a finite set of states
+        \item $\Sigma$ is a finite set called the alphabet
+        \item $\delta:\, Q\times\Sigma \to Q$, the transition function
+        \item $s \in Q$, the starting state
+        \item $F \subseteq Q$, the set of accepting states
+    \end{itemize}
+\end{definition}

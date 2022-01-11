@@ -1,0 +1,46 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{\@mypartnumtocformat {I}{Automata and Languages}}{5}{part.1}%
+\ttl@starttoc {default@1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Regular Language}{7}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Alphabet and Strings}{7}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Regular Language}{7}{section.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Context-Free Language}{9}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Turing Machine}{11}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Turing Machine}{11}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Configuration of Turing Machine}{12}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Decidability and Recognizability}{13}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Some Classes of Languages}{13}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Difference Between FSA and TM}{13}{section.3.5}%
+\ttl@stoptoc {default@1}
+\ttl@starttoc {default@2}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{15}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{17}{appendix*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{21}{appendix*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{27}{appendix*.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{37}{appendix*.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{39}{appendix*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Courses}{39}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Books}{39}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Journal Articles}{40}{section*.16}%
+\contentsfinish 
