@@ -23,24 +23,42 @@
 \contentsline {section}{\numberline {3.4}Some Classes of Languages}{13}{section.3.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}Difference Between FSA and TM}{13}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Multi-tape Turing Machines}{13}{section.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.7}Non-deterministic Turing Machines}{14}{section.3.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.8}Enumerator}{14}{section.3.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.9}Church-Turing Thesis}{16}{section.3.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{\@mypartnumtocformat {II}{Decidability and Computability}}{17}{part.2}%
 \ttl@stoptoc {default@1}
 \ttl@starttoc {default@2}
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{15}{section*.4}%
+\contentsline {chapter}{\numberline {4}Undecidable Language}{19}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{17}{appendix*.5}%
+\contentsline {section}{\numberline {4.1}Countability}{19}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{21}{appendix*.10}%
+\contentsline {section}{\numberline {4.2}Universal Turing Machine}{20}{section.4.2}%
+\ttl@stoptoc {default@2}
+\ttl@starttoc {default@3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{27}{appendix*.11}%
+\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{21}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{37}{appendix*.12}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{23}{appendix*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{39}{appendix*.13}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{27}{appendix*.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Courses}{39}{section*.14}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{33}{appendix*.12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Books}{39}{section*.15}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{43}{appendix*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Journal Articles}{40}{section*.16}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{45}{appendix*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Courses}{45}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Books}{45}{section*.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Journal Articles}{46}{section*.17}%
 \contentsfinish 

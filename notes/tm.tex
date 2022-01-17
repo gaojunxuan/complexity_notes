@@ -99,3 +99,98 @@ Later, we will show that $\textsf{P} \subsetneq \textsf{D} \subsetneq \textsf{SD
     \item Head can move left or right, unless the head is at left-most position.
     \item Special ``accept'' and ``reject'' states that stop computation immediately. The machine halts only when it reaches an accept or reject state. On the other hand, an FSA can only perform a finite amount of transitions before it halts.
 \end{itemize}
+
+\section{Multi-tape Turing Machines}
+
+$$
+\delta:\, Q \times \Gamma^k \to Q \times \Gamma^k \times \{L,R\}^k
+$$
+
+We will show a 2-tape TM can be simulated by a single tape TM. The idea is to store tape 1 on odd cells, tape 2 on even cells, and represent the tape head using new symbols with $\cdot$ on top. 
+
+\begin{theorem}
+    Every multi-tape Turing machine is equivalent to an ordinary Turing machine.
+\end{theorem}
+
+To simulate a transition:
+\begin{itemize}
+    \item scan the entire tape to find the symbols at tape heads;
+    \item transition
+    \item scan again and update the values at each tape and move tape heads left or right (by shifting the dots)
+\end{itemize}
+
+\section{Non-deterministic Turing Machines}
+
+$$
+\delta:\, Q \times \Gamma \to \mathcal{P}(Q \times \Gamma \times \{L,R\})
+$$
+Instead of giving a single instruction, the transition function for TMs gives a set of instructions.
+
+\begin{theorem}
+    Every non-deterministic Turing machine is equivalent to an ordinary Turing.
+\end{theorem}
+
+We cam view the computation of a nondeterministic as a tree.
+
+The idea is to run a BFS on the tree to find an accepting path. DFS may not work because it may get stuck in a looping state. At each state (internal node), the branching factor is at most $b$. We will address each node in level $k$ the tree with a string of length $k$ in $\{1,2,\ldots,b\}^k$. A BFS is then searching through $\{1,2,\ldots,b\}^k$ in standard string order (i.e. $\epsilon,1,2,\ldots,b,11,12,\ldots$).
+
+We will simulate this with a 3-tape TM. The first tape stores the input. The second tape is for simulation. The third tape is the address incrementor.
+
+\begin{codebox}
+    \Procname{$\proc{Nondeterministic-TM}$}
+    \li \While \textbf{true} \Do
+        \li run $M$ on tape 2
+        \li whenever we need to make a choice, consult tape 3
+        \li \If $q_{accept}$ accept
+        \li \textbf{increment} tape 3
+\end{codebox}
+
+\section{Enumerator}
+
+An enumerator $E$ is a 2-tape Turing machine with a work tape and an output tape (printer). The output tape is readonly. More formally, an enumerator is a tuple $E = (Q,\Sigma,\Gamma,\delta,q_0,q_{print},q_{rejct})$ where
+$$
+\delta:\;Q \times \Gamma \to Q \times \Gamma \times \{L,R\} \times \Sigma_{\epsilon}
+$$
+is the transition function and $\Sigma$ is the output alphabet. The purpose of the print state $q_{print}$ is to end the printing of the current string (we can think of this as a carriage return on a typewriter). If $q_{reject}$ is entered, the computation/printing will stop.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{tm-enumerator.pdf}
+    \caption{An enumerator.}
+    \label{fig:tm-enumerator}
+\end{figure}
+
+\begin{theorem}
+    A language $A \subseteq \Sigma^*$ is Turing-recognizable if and only if some enumerator enumerates it.
+\end{theorem}
+
+\begin{proof}
+    \hfill
+
+    $(\Leftarrow)$: Suppose $E$ enumerates a language $A$, we will show that there exists a TM $M$ that recognizes $A$. We will construct a Turing machine $M$ such that $L(M)=A$ as follows
+    $$
+    \begin{aligned}
+        M = ``&\text{On input $w$,} \\
+        & \text{1. Run $E$. Every time $E$ outputs a string, compare it with $w$;} \\
+        & \text{2. If $w$ ever appears in the output $E$, accept; Otherwise, keep running} "
+    \end{aligned}
+    $$
+    $M$ accepts those strings that are printed by $E$. Note that $M$ does not necessarily terminate and hence $L(M)$ is not necessarily decidable.
+
+    $(\Rightarrow)$: Suppose $A$ is Turing-recognizable, then $L(M)=A$ for some Turing machine $M$. Let $s_1,s_2,s_3,\ldots \in \Sigma^*$ be the list of all possible strings in $\Sigma^*$ in lexicographical ordering, and construct $E$ as follows:
+    $$
+    \begin{aligned}
+        E = ``& \text{1. Repeat the following for $i=1,2,3,\ldots$} \\
+        &\quad \text{2. Run $M$ for $i$ steps on each input $s_1,s_2,\ldots,s_i$;} \\
+        &\quad \text{3. If any computations accept, print out the corresponding $s_j$}"
+    \end{aligned}
+    $$
+\end{proof}
+
+It might be tempting to run $M$ on all possible strings at each iteration or to use a nondeterministic Turing machine, but both might get stuck running forever because there can be infinitely many possible strings to consider. In the case of a nondeterministic Turing machine, the computation tree can have a infinite branching factor.
+
+\begin{theorem}
+    A language is decidable if and only if some enumerator $E$ enumerates it in lexicographic order.
+\end{theorem}
+
+\section{Church-Turing Thesis}

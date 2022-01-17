@@ -1,0 +1,90 @@
+\section{Countability}
+
+\vspace{\parskip}
+
+\begin{definition}[Countable Set]
+    A set $A$ is countable if $A$ is empty or there is a injective function $f:\, A \to \N$, or equivalently, a surjective function $f:\, \N \to A$.
+\end{definition}
+
+\begin{theorem}
+    $\R$ is not countable.
+\end{theorem}
+
+\begin{theorem}
+    $2^{\N} = \mathcal{P}(\N)$ is not countable.
+\end{theorem}
+
+\begin{corollary}
+    There exists some $A \subseteq \Sigma^*$ such that $A$ is not Turing-recognizable.
+\end{corollary}
+
+\begin{proof}
+    We will prove this by showing that the set of all languages in $\Sigma^*$ is not countable, but the set of Turing-recognizable languages is countable.
+
+    We first show that $\Sigma^*$ is countable. To show this, we simply list all strings in $\Sigma^*$ in lexicographic order.
+
+    Observe that $\mathsf{TR} = \{ A \subseteq \Sigma^* \mid A = L(M) \}$ is also countable because the number of Turing machines is countable, each of which can be encoded as a finite length string.
+
+    But the set of all languages $\{ A \subseteq \Sigma^* \} = 2^{\Sigma^*}$. By Cantor's theorem, since $\Sigma^*$ is countably infinite, the power set of $\Sigma^*$ is uncountable.
+
+    Hence, there exists some language $A \subseteq \Sigma^*$ that is not Turing-recognizable.
+\end{proof}
+
+Let $\langle M \rangle$ denote the encoding of a Turing machine $M$. For $n \in \N$, let $\langle n \rangle \in \{0,1\}^*$ be the binary encoding of $n$. For a sequence of numbers $n_1,n_2,\ldots,n_k$, $\langle n_1,n_2,\ldots,n_k \rangle \in \{0,1,\#\}^*$ be $\langle n_1 \rangle \# \langle n_2 \rangle \# \cdots \# \langle n_k \rangle$.
+
+Then, any Turing machine can be determined by a finite sequence of numbers specifying $|Q|$, $|\Sigma|$, $|\Gamma|$, identity of $q_0,q_{accept},q_{reject}$, and a sequence of numbers specifying $\delta$.
+
+$$
+\langle M \rangle = \text{the string that determines $M$}
+$$
+
+Furthermore, we can denote a Turing machine $T$ with input $w$ as $\langle M, w \rangle$.
+
+\begin{theorem}
+    Let
+    $$
+    \mathsf{DIAG} = \{ \langle M \rangle \mid \text{$M$ is a TM and $\langle M \rangle \not\in L(M)$} \}
+    $$
+    $\mathsf{DIAG}$ is not Turing recognizable.
+\end{theorem}
+
+\begin{proof}
+    Suppose, for contradiction, that there exists a TM $M$ such that $T(M) = \mathsf{DIAG}$. Then, we can ask if $\langle M \rangle \in L(M)$.
+
+    Suppose that $\langle M \rangle \in L(M)$. Then
+    $$
+    \langle M \rangle \in L(M) \iff \langle M \rangle \in \mathsf{DIAG} \iff \langle M \rangle \not\in \in L(M)
+    $$
+    which is a contradiction.
+\end{proof}
+
+This is similar to Russell's paradox.
+
+\begin{theorem}
+    Every finite language is Turing recognizable and decidable.
+\end{theorem}
+
+\begin{theorem}
+    Every regular language is Turing recognizable and decidable.
+\end{theorem}
+
+\section{Universal Turing Machine}
+
+Let $A_{\mathsf{TM}}$ be the language
+$$
+\{ \langle M,w \rangle \mid \text{$M$ accepts $w$} \}
+$$
+
+\begin{theorem}
+    $A_{\mathsf{TM}}$ is Turing-recognizable.
+\end{theorem}
+
+\begin{proof}
+    We show that there exists a TM $U$ such that $L(U) = A_{\mathsf{TM}}$. $U$ decodes $\langle M \rangle$ into a TM $M$ and simulates $M$ on $w$. Thus, $A_{\mathsf{TM}}$ is Turing-recognizable.
+\end{proof}
+
+The $U$ that we have constructed to recognize $A_{\mathsf{TM}}$ is called a universal Turing machine.
+
+\begin{theorem}
+    $A_{\mathsf{TM}}$ is not decidable.
+\end{theorem}
