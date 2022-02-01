@@ -30,12 +30,12 @@
     Hence, there exists some language $A \subseteq \Sigma^*$ that is not Turing-recognizable.
 \end{proof}
 
-Let $\langle M \rangle$ denote the encoding of a Turing machine $M$. For $n \in \N$, let $\langle n \rangle \in \{0,1\}^*$ be the binary encoding of $n$. For a sequence of numbers $n_1,n_2,\ldots,n_k$, $\langle n_1,n_2,\ldots,n_k \rangle \in \{0,1,\#\}^*$ be $\langle n_1 \rangle \# \langle n_2 \rangle \# \cdots \# \langle n_k \rangle$.
+Let $\encoding{M}$ denote the encoding of a Turing machine $M$. For $n \in \N$, let $\langle n \rangle \in \{0,1\}^*$ be the binary encoding of $n$. For a sequence of numbers $n_1,n_2,\ldots,n_k$, $\langle n_1,n_2,\ldots,n_k \rangle \in \{0,1,\#\}^*$ be $\langle n_1 \rangle \# \langle n_2 \rangle \# \cdots \# \langle n_k \rangle$.
 
 Then, any Turing machine can be determined by a finite sequence of numbers specifying $|Q|$, $|\Sigma|$, $|\Gamma|$, identity of $q_0,q_{accept},q_{reject}$, and a sequence of numbers specifying $\delta$.
 
 $$
-\langle M \rangle = \text{the string that determines $M$}
+\encoding{M} = \text{the string that determines $M$}
 $$
 
 Furthermore, we can denote a Turing machine $T$ with input $w$ as $\langle M, w \rangle$.
@@ -43,17 +43,17 @@ Furthermore, we can denote a Turing machine $T$ with input $w$ as $\langle M, w 
 \begin{theorem}
     Let
     $$
-    \mathsf{DIAG} = \{ \langle M \rangle \mid \text{$M$ is a TM and $\langle M \rangle \not\in L(M)$} \}
+    \mathsf{DIAG} = \{ \encoding{M} \mid \text{$M$ is a TM and $\encoding{M} \not\in L(M)$} \}
     $$
     $\mathsf{DIAG}$ is not Turing recognizable.
 \end{theorem}
 
 \begin{proof}
-    Suppose, for contradiction, that there exists a TM $M$ such that $T(M) = \mathsf{DIAG}$. Then, we can ask if $\langle M \rangle \in L(M)$.
+    Suppose, for contradiction, that there exists a TM $M$ such that $T(M) = \mathsf{DIAG}$. Then, we can ask if $\encoding{M} \in L(M)$.
 
-    Suppose that $\langle M \rangle \in L(M)$. Then
+    Suppose that $\encoding{M} \in L(M)$. Then
     $$
-    \langle M \rangle \in L(M) \iff \langle M \rangle \in \mathsf{DIAG} \iff \langle M \rangle \not\in \in L(M)
+    \encoding{M} \in L(M) \iff \encoding{M} \in \mathsf{DIAG} \iff \encoding{M} \not\in \in L(M)
     $$
     which is a contradiction.
 \end{proof}
@@ -80,7 +80,7 @@ $$
 \end{theorem}
 
 \begin{proof}
-    We show that there exists a TM $U$ such that $L(U) = A_{\mathsf{TM}}$. $U$ decodes $\langle M \rangle$ into a TM $M$ and simulates $M$ on $w$. Thus, $A_{\mathsf{TM}}$ is Turing-recognizable.
+    We show that there exists a TM $U$ such that $L(U) = A_{\mathsf{TM}}$. $U$ decodes $\encoding{M}$ into a TM $M$ and simulates $M$ on $w$. Thus, $A_{\mathsf{TM}}$ is Turing-recognizable.
 \end{proof}
 
 The $U$ that we have constructed to recognize $A_{\mathsf{TM}}$ is called a universal Turing machine.
@@ -88,3 +88,37 @@ The $U$ that we have constructed to recognize $A_{\mathsf{TM}}$ is called a univ
 \begin{theorem}
     $A_{\mathsf{TM}}$ is not decidable.
 \end{theorem}
+
+\section{Decidability}
+
+\begin{theorem}
+    A language $L$ is decidable if and only if there is an enumerator that enumerates $L$ in standard string order.
+\end{theorem}
+
+\begin{proof}
+    Decidable implies standard string order enumerator.
+
+    Let $M$ be a decider for $L$. We will design an standard string order.
+
+    \begin{codebox}
+        \Procname{$\proc{E}$}
+        \li \For $w$ in standard string order \Do
+            \li \textbf{run} $M$ \textbf{on} $w$ 
+            \li \If $M$ accepts $w$ \Then
+                \li print($w$)
+    \end{codebox}
+
+    Standard string enumerator implies decidable.
+
+    \begin{codebox}
+        \Procname{$\proc{M}(w)$}
+        \li \textbf{run} $E$ 
+        \li \While $\proc{Has-Next}(E)$ \Do \RComment{while $E$ still has string to print}
+            \li $x = \proc{Next}(E)$ \RComment{get next string}
+            \li \If $x \isequal w$ \Then
+                \li \textbf{accept}
+            \End
+            \li \If $x \geq w$ \Then
+                \li \textbf{reject}
+    \end{codebox}
+\end{proof}

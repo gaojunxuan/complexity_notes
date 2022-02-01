@@ -41,24 +41,58 @@
 \contentsline {section}{\numberline {4.1}Countability}{19}{section.4.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Universal Turing Machine}{20}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Decidability}{20}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Reducibility}{23}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Proving Undecidability by Reduction}{23}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Closure Properties}{23}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.1}Union, Intersection, and Complement}{23}{subsection.5.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Computable Functions}{24}{section.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}Mapping Reducible}{25}{section.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.5}Applications of Reduction}{26}{section.5.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5.1}Halting Problem}{26}{subsection.5.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5.2}EQ}{26}{subsection.5.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.6}Rice's Theorem}{28}{section.5.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Computation History Method}{31}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Configuration and Computation History}{31}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Decidability of Problems Concerning Linearly Bounded Automata}{32}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.1}A\textsubscript {LBA} is Decidable}{32}{subsection.6.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2.2}E\textsubscript {LBA} is Undecidable}{32}{subsection.6.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Post Correspondence Problem}{33}{section.6.3}%
 \ttl@stoptoc {default@2}
 \ttl@starttoc {default@3}
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{21}{section*.5}%
+\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{35}{section*.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{23}{appendix*.6}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{37}{appendix*.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{27}{appendix*.11}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{41}{appendix*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{33}{appendix*.12}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{47}{appendix*.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{43}{appendix*.13}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{57}{appendix*.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{45}{appendix*.14}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{59}{appendix*.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Courses}{45}{section*.15}%
+\contentsline {section}{Courses}{59}{section*.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Books}{45}{section*.16}%
+\contentsline {section}{Books}{59}{section*.18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Journal Articles}{46}{section*.17}%
+\contentsline {section}{Journal Articles}{60}{section*.19}%
 \contentsfinish 

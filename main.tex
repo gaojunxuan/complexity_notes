@@ -102,12 +102,31 @@
 % \newcommand{\Expected}{\mathbb{E}}
 \newcommand{\Prob}{\mathrm{Prob}}
 
-\renewcommand{\implies}{\textsc{ implies }}
-\renewcommand{\land}{\textsc{ and }}
-\renewcommand{\lor}{\textsc{ or }}
-\renewcommand{\iff}{\textsc{ iff }}
-\renewcommand{\lnot}{\textsc{not}}
-\newcommand{\lnand}{\textsc{ nand }}
+%\renewcommand{\implies}{\textsc{ implies }}
+%\renewcommand{\land}{\textsc{ and }}
+%\renewcommand{\lor}{\textsc{ or }}
+%\renewcommand{\iff}{\textsc{ iff }}
+%\renewcommand{\lnot}{\textsc{not}}
+%\newcommand{\lnand}{\textsc{ nand }}
+
+\newcommand{\coTR}{\mathsf{co}\text{-}\mathsf{TR}}
+\newcommand{\TR}{\mathsf{TR}}
+\newcommand{\EQ}{\mathrm{EQ}}
+\newcommand{\D}{\mathsf{D}}
+\newcommand{\p}{\mathsf{NP}}
+\newcommand{\NP}{\mathsf{NP}}
+\newcommand{\TM}{\mathsf{TM}}
+\newcommand{\LBA}{\mathsf{LBA}}
+\newcommand{\A}{\mathrm{A}}
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\ATM}{\mathrm{A}_{\mathsf{TM}}}
+\newcommand{\Diag}{\mathrm{DIAG}}
+\newcommand{\PCP}{\mathrm{PCP}}
+\newcommand{\MPCP}{\mathrm{MPCP}}
+\newcommand{\Halt}{\mathrm{HALT}}
+\newcommand{\encoding}[1]{\langle #1 \rangle}
+
+\newcommand{\lang}{\mathcal{L}}
 
 \setlength{\parindent}{0cm}
 
@@ -189,6 +208,12 @@ The cover depicts a Turing machine. Turing machine is a simple but powerful comp
 
 \chapter{Undecidable Language}
 \input{notes/undecidability.tex}
+
+\chapter{Reducibility}
+\input{notes/reducibility.tex}
+
+\chapter{Computation History Method}
+\input{notes/comphist.tex}
 
 %----------------------------------------------------------------------------------------
 %	APPENDIX
