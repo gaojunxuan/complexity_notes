@@ -111,7 +111,7 @@ The next natural question is whether or not $\E_{\LBA}$ is also decidable. We wi
 
 A domino has the form $\displaystyle \left[ \frac{t}{b} \right] $ where $t, b \in \Sigma^*$.
 
-Given a collection of dominos $\displaystyle P = \left\{ \left[ \frac{t_1}{b_1} \right], \ldots, \left[ \frac{t_k}{b_k} \right] \right\}$, we say there is a \textit{\textbf{match}} if we can make a list using the dominos from $P$ (possibly with repetitions) such that the whole string on the top row is equal to the whole string on the bottom row. The \textit{\textbf{Post Correspondence Problem (PCP)}} is to determine whether a collection of dominos $P$ has a match.
+Given a collection of dominos $\displaystyle P = \left\{ \left[ \frac{t_1}{b_1} \right], \ldots, \left[ \frac{t_k}{b_k} \right] \right\}$, we say there is a \textit{\textbf{match}} if we can make a list using the dominos from $P$ (possibly with repetitions) such that the whole string on the top row is equal to the whole string on the bottom row. The \textit{\textbf{Post Correspondence Problem (PCP)}} is to determine whether a collection of dominos $P$ has a match. That is, we want to determine if there is a sequence $i_1,i_2,\ldots,i_m \in \{1,2,\ldots,k\}$ such that $t_{i_1} \cdot t_{i_2} \cdot \ldots \cdot t_{i_m} = b_{i_1} \cdot b_{i_2} \cdot \ldots \cdot b_{i_m}$.
 
 Figure \ref{fig:pcp-example} shows a set of dominos and a match.
 
@@ -132,3 +132,80 @@ $$
 $$
 
 To make the proof simpler, we first restrict ourselves to the Modified Post Correspondence Problem (MPCP). MPCP adds the additional requirement that the match starts with the first domino $\left[ \frac{t_1}{b_1} \right]$.
+
+\begin{proof}[Proof \hspace{0.1em} ($\ATM \leq_m \MPCP$)]
+    Let $M = (Q,\Sigma,\Gamma,\delta,q_0,q_{acc},q_{rej})$ such that $w \in \Sigma^*$.
+
+    We are given $\encoding{M,w}$ as input and must construct a set of dominos $P$ such that $P$ has a match if and only if $M$ accepts on input $w$. We assume, without loss of generality, $M$ never attempts to move head left when its head is in the leftmost position.
+
+    Given $\encoding{M,w}$, we construct $P$. To do that, we introduce the following types of dominos. We put each type of dominos in the order as they are introduced below.
+
+    \textbf{Step 1}: $\displaystyle \left[ \frac{\#}{\# q_0 w_1 w_2 \ldots w_n \#} \right]$ or $\displaystyle \left[ \frac{\#}{\# q_0 \sqcup} \right]$ if $w = \epsilon$.
+
+    This domino is used as the first domino, which simulates the initial configuration of $M$.
+
+    \textbf{Step 2}: For all $a,a' \in \Gamma$ and $q,q' \in Q$ where $q \neq q_{rej}$, if $\delta(q,a) = (q',a',R)$, we put the domino
+    $$
+    \left[ \frac{qa}{a'q'} \right] 
+    $$
+    This domino simulates the transitions where the head moves to the right.
+
+    \textbf{ 3}: For all $a,a',b \in \Gamma$ and $q,q' \in Q$ where $q \neq q_{rej}$, if $\delta(q,a) = (q',a',L)$, we put the domino
+    $$
+    \left[ \frac{bqa}{q'ba'} \right] 
+    $$
+    This domino simulates the left movement of the head.
+
+    \textbf{Step 4}: For every $a \in \Gamma$, we put $\displaystyle \left[ \frac{a}{a}\right]$.
+    
+    This domino fills in the remaining contents of the tape after a transition.
+
+    \textbf{Step 5}: $\displaystyle \left[ \frac{\#}{\#} \right]$ and $\displaystyle \left[ \frac{\#}{\sqcup\#} \right]$
+    
+    This domino places the delimiter marking the end of a configuration.
+
+    We repeat Step 2-5 to simulate the configurations of $M$ until it reaches the accepting configuration. After all these are finished, we should have a sequence of dominos of the form
+
+    \begin{center}
+        \includegraphics[width=0.4\linewidth]{pcp-step5.pdf}
+    \end{center}
+
+    \textbf{Step 6}: For every $a \in \Gamma$, put
+    $$
+    \left[ \frac{a q_{acc}}{q_{acc}} \right]  \quad \text{and} \quad \left[ \frac{q_{acc} a}{q_{acc}} \right]
+    $$
+    This step eats away the symbols adjacent to $q_{acc}$ at the bottom, one at a time, as illustrated below.
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{pcp-step6.pdf}
+    \end{center}
+
+    Finally, \\
+    \textbf{Step 7}: Put the domino $\displaystyle \left[ \frac{q_{acc} \#\#}{\#} \right]$. This step finishes off the alignment of the top and bottom row.
+    \begin{center}
+        \includegraphics[width=0.2\linewidth]{pcp-step7.pdf}
+    \end{center}
+
+    This concludes the construction of $P$.
+
+    \textit{Claim}. $P$ is an accepting instance of MPCP $\iff$ $M$ accepts $w$. 
+
+    \hfill
+
+    Next, we provide the construction that shows $\MPCP \leq_m \PCP$. It trivially holds that any accepting instance of MPCP is also a PCP. To see why, consider the match $\left[ \frac{\#}{\#} \right]$.
+
+    Now, we show how to convert an instance of MPCP to PCP such that the converted instance still simulates $M$ on $w$. Let $\displaystyle P = \left\{ \left[ \frac{t_1}{b_1} \right], \ldots, \left[ \frac{t_k}{b_k} \right] \right\}$ be an input to MPCP. Further, let $\{*, \diamond\}$ be new symbols that are not in any $t_i$ or $b_i$.
+
+    For any string $u = u_1u_2\ldots u_n$, let
+    $$
+    \begin{aligned}
+        \circledast u &= * u_1 * u_2 \ldots * u_n \\
+        u \circledast &= u_1 * u_2 * \ldots u_n * \\
+        \circledast u \circledast &= * u_1 * u_2 * \ldots * u_n *
+    \end{aligned}
+    $$
+    Consider the domino set $P'$ 
+    $$
+    P' = \left\{ \left[ \frac{\circledast t_1}{\circledast b_1 \circledast} \right]  \right\} \cup \left\{ \left[ \frac{\circledast t_i}{ b_i \circledast} \right]  \mid 1 \leq i \leq k \right\} \cup \left\{ \left[ \frac{* \diamond}{\diamond} \right]  \right\}
+    $$
+    Then, there is a match in $P$ starting with $\left[ \frac{t_1}{b_1} \right] $ if and only if there is a match in $P'$. The only domino in $P'$ that could start a match is $\left[ \frac{\circledast t_1}{\circledast b_1 \circledast} \right]$ because it is the only one where both the top string and bottom string starts with *.
+\end{proof}

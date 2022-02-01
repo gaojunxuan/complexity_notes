@@ -303,7 +303,7 @@ Now, let's prove Rice's theorem using reduction.
 \begin{proof}
     Let $T_0$ be the TM which always rejects. Without loss of generality, suppose that $\encoding{T_0} \not\in P$. Otherwise, we can consider $\overline{P}$ which also satisfies the criteria for Rice's theorem.
     
-    Since $P$ is nontrivial, there exists TM $T_1$ such that $\encoding{T_1} \in P$. We will show that $\ATM \leq_m P$. In this end, we map $\encoding{M,w}$ to $M_w$ where
+    Since $P$ is nontrivial, there exists TM $T_1$ such that $\encoding{T_1} \in P$. We will show that $\ATM \leq_m P$. To this end, we map $\encoding{M,w}$ to $M_w$ where
     $$
     \begin{aligned}
         M_w = ``
@@ -316,11 +316,20 @@ Now, let's prove Rice's theorem using reduction.
         \end{aligned}
     \end{aligned}
     $$
-    $\lang(M_w)$ is either $\emptyset = \lang(T_0)$ or the langauge of $T_1$, $\lang(T_1)$, depending on whether $w$ is accepted by $M$.
+    $\lang(M_w)$ is either $\emptyset = \lang(T_0)$ or the langauge of $T_1$, $\lang(T_1)$, depending on whether $w$ is accepted by $M$. We use $M_w$'s ability to decide between $T_0$ and $T_1$ to decide $\ATM$.
 
     \textit{Claim}. $\encoding{M,w} \in \ATM \iff \encoding{M_w} \in P$.
 
-    If $M$ accepts $w$, then $\lang(M_w) = \lang(T_1)$, so $M_w \in P$. \\
+    Let $R$ be the decider for $P$.
+    $$
+    \begin{aligned}
+        S = ``&\text{on input $\encoding{M,w}$} \\
+        &\text{1. Run $R$ on $\encoding{M,w}$ to check if $\encoding{M_w} \in P$.} \\
+        & \text{2. If yes, accept; otherwise, reject }"
+    \end{aligned}
+    $$
+
+    If $M$ accepts $w$, then $\lang(M_w) = \lang(T_1)$, so $\encoding{M_w} \in P$. \\
     If $M$ rejects $w$, then $\lang(M_w) = \emptyset = \lang(T_0)$, so $\encoding{M_w} \not\in P$. \\
     If $M$ loops on $w$, $M_w$ loops on all inputs so $\lang(M_w) = \emptyset = \lang(T_0)$.
 \end{proof}
