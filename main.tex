@@ -100,7 +100,7 @@
 
 \DeclareMathOperator*{\Expected}{\mathbb{E}}
 % \newcommand{\Expected}{\mathbb{E}}
-\newcommand{\Prob}{\mathrm{Prob}}
+\DeclareMathOperator*{\Prob}{\mathrm{Prob}}
 
 %\renewcommand{\implies}{\textsc{ implies }}
 %\renewcommand{\land}{\textsc{ and }}
@@ -113,7 +113,10 @@
 \newcommand{\TR}{\mathsf{TR}}
 \newcommand{\EQ}{\mathrm{EQ}}
 \newcommand{\D}{\mathsf{D}}
-\newcommand{\p}{\mathsf{NP}}
+\newcommand{\p}{\mathsf{P}}
+\newcommand{\FP}{\mathsf{FP}}
+\newcommand{\Time}{\mathsf{TIME}}
+\newcommand{\NTime}{\mathsf{NTIME}}
 \newcommand{\NP}{\mathsf{NP}}
 \newcommand{\TM}{\mathsf{TM}}
 \newcommand{\LBA}{\mathsf{LBA}}
@@ -124,6 +127,9 @@
 \newcommand{\PCP}{\mathrm{PCP}}
 \newcommand{\MPCP}{\mathrm{MPCP}}
 \newcommand{\Halt}{\mathrm{HALT}}
+\newcommand{\SAT}{\mathrm{SAT}}
+\newcommand{\threeSAT}{\mathrm{3SAT}}
+\newcommand{\Clique}{\mathrm{CLIQUE}}
 \newcommand{\encoding}[1]{\langle #1 \rangle}
 
 \newcommand{\lang}{\mathcal{L}}
@@ -214,6 +220,20 @@ The cover depicts a Turing machine. Turing machine is a simple but powerful comp
 
 \chapter{Computation History Method}
 \input{notes/comphist.tex}
+
+\chapter{Information}
+\input{notes/kolmogorov.tex}
+
+\part{Complexity Theory}
+
+\chapter{Time Complexity}
+\input{notes/time.tex}
+
+\chapter{The Cook-Levin Theorem}
+\input{notes/cook-levin.tex}
+
+\chapter{NP-Complete Problems}
+\input{notes/np-complete.tex}
 
 %----------------------------------------------------------------------------------------
 %	APPENDIX

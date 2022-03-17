@@ -1,0 +1,128 @@
+\section{Complexity and Asymptotic Notation}
+
+We express the running time of an algorithm as a function of the length of the string repreenting the input and do not consider other parameters. In worst-case analysis, we consider the longest running time of all inputs of a particular length. In average-case analysis, we considerthe average of all the running times of inputs of a particular length. Formally, we define the worst-case time complexity as follows
+
+\begin{definition}[Time Complexity and Worst-Case Time Complexity]
+    Let $M$ be a Turing machine over input alphabet $\Sigma$. For each $x \in \Sigma^*$, let $t_M(x)$ be the number of steps required by $M$ to halt. If $M$ never halts on $x$, we define $t_M(x) = \infty$. Then, the worst case time complexity of $M$ is the function $T_M:\, \N \to \R \cup \{\infty\}$ defined by
+    $$
+    T_M(n) = \max \{t_M(x) \mid x \in \Sigma^* \land |x| = n \}
+    $$
+\end{definition}
+
+The asymptotic upper bounds are defined the same way as we have discussed in previous courses.
+
+We say that a Turing machine $M$ is a $O(t(n))$ time Turing machine if $T_M(n) \in O(t(n))$. With that, we can define the time complexity classes.
+
+\begin{definition}[TIME]
+    Let $t:\, \N \to \R$ be a function. We define the time complexity class $\Time(t(n))$ to be the function of all languages that are decidable by an $O(t(n))$ time Turing machine.
+\end{definition}
+
+\section{Models of Computation}
+
+In computability theory, many problems are invariant under all reasonable (and classical) models of computation. A language that is not decidable by a Turing machine, is not decidable by a nondeterministic Turing machine or multi-tape Turing machine either. However, in the study of complexity theory, the model of computation often does make a difference.
+
+\begin{theorem}
+    Let $t(n)$ be a function, where $t(n) \geq m$. Then, every $t(n)$ time multi-tape Turing machine has an equivalent $O(t^2(n))$ single-tape Turing machine.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+
+\section{The Class P}
+
+\vspace{\parskip}
+
+\begin{definition}[P]
+    $$
+    \p = \bigcup_{k} \Time(n^k)
+    $$
+    or equivalently, without using the class $\Time(\cdot)$, we can define the class $\p$ as
+    $$
+    \p = \{ L \mid \text{$L=\lang(M)$ for some polynomial time Turing machine $M$ }\}
+    $$
+\end{definition}
+
+\subsection{Some Languages in P}
+
+\subsubsection{PATH}
+
+\vspace{\parskip}
+
+\begin{definition}
+    $$
+    \mathrm{PATH} = \{ \encoding{G,s,t} \mid \text{$G$ is a directed graph with a path from $s$ to $t$ }\}
+    $$
+\end{definition}
+
+\begin{theorem}
+    $$
+    \mathrm{PATH} \in \p
+    $$ 
+\end{theorem}
+
+\begin{proof}
+    We construct a decider $M$ for $\mathrm{PATH}$.
+
+    $$
+    \begin{aligned}
+        M = ``&\text{on input $\encoding{G,s,t}$} \\
+        &\text{1. Mark $s$} \\
+        &\text{2. Repeat until nothing new is marked} \\
+        &\text{\quad For each marked node $x$,} \\
+        &\text{\quad\quad Scan $G$ to mark all $y$ where $(x,y) \in E$} \\
+        &\text{3. Accept if $t$ is marked. Reject if not.}"
+    \end{aligned}
+    $$
+    This is essential the breadth-first search algorithm. Clearly, Step 2 takes $O(n^4)$ steps because the outer loop takes at most $n$ iterations, and the inner loop also takes at most $n^2$ steps. The step within the inner loop marks at most $n^2$ times. Overall, the algorithm should run in $O(n^4)$ time, so $\mathrm{PATH} \in \p$.
+\end{proof}
+
+To show polynomial time, we need to show that each stage of the algorithm should be clearly polynomial and the total number of steps should also be polynomial.
+
+\section{The Class NP}
+
+\subsection{Verifier}
+
+\begin{definition}
+    A \textit{\textbf{verifier}} for a language $A$ is an algorithm $V$, where
+    $$
+    A = \{ w \mid \text{$V$ accepts $\encoding{w,c}$ for some string $c$ }\}
+    $$
+    A \textit{\textbf{polynomial time verifier}} runs in polynomial time in the length of $w$. A language $A$ is \textit{\textbf{polynomially verifiable}} if it has a polynomial time verifier. The $c$ in the definition is called a \textit{\textbf{certificate}} or \textit{\textbf{proof}} of membership in $A$.
+\end{definition}
+
+\begin{definition}[Verifier-based Definition of NP]
+    $\NP$ is the class of languages that have polynomial time verifiers.
+\end{definition}
+
+\subsection{NP}
+
+Equivalently, we can define the class $\NP$ in a way similar to how we have defined $\p$. To do that, we first define $\NTime(\cdot)$.
+
+\begin{definition}[NTIME]
+    $$
+    \NTime(t(n)) = \{ L \mid \text{$L$ is the language decided by an $O(t(n))$ time nondeterministic TM }\}
+    $$
+\end{definition}
+
+Then,
+
+\begin{definition}[NP]
+    $$
+    \NP = \bigcup_k \NTime(n^k)
+    $$
+\end{definition}
+
+\begin{theorem}
+    A language has a polynomial time verifiers if and only if it is decided by some nondeterministic polynomial time Turing machine.
+\end{theorem}
+
+\begin{proof}
+    The idea of the proof is to construct a polynomial time NTM using a verifier by nondeterministically guessing the certificate for $V$, and to construct a verifier using the sequence of nondeterministic choices made by the NTM as the certificate $c$.
+\end{proof}
+
+We show that HAMPATH $\leq_P$ UHAMPATH. More specifically, given $\encoding{G,s,t}$, where $G$ is a directed graph where $G'$ is an undirected graph such that
+$$
+\encoding{G,s,t} \in \mathrm{HAMPATH} \iff \encoding{G',s',t'} \in \mathrm{UHAMPATH}
+$$

@@ -1,0 +1,275 @@
+\section{Quantifying Information}
+
+Can we quantify how much information is in a string.
+
+Consider
+$$
+x = 0101010101010101
+$$
+and
+$$
+y = 110001010110010
+$$
+Intuitively, $y$ appears to have more information than $x$, which is simply repeated $01$.
+
+We would like to have a formal definition that captures the intuitive definition of ``information''.
+
+Idea: The more we can compress a string, the less information it contains.
+
+Thesis: The amount of information in a string is the shortest way to describe the string.
+
+Consider $\encoding{M,w}$, where $M(w)$ halts with only $x$ on its tape. We need to specify an encoding of $\encoding{M,w}$ (what is the alphabet, and when does $\encoding{M}$ end and $w$ begin).
+
+There are different encodings. For the purpose of our discussion, we restrict outselves to binary strings. A specific encoding of $\encoding{M,w}$, let $M$ be a TM with input alphabet $\{0,1\}$ and $w = w_1w_2\ldots w_n \in \{0,1\}^*$.
+
+If $\encoding{M} = z_1z_2\ldots z_k \in \{0,1\}^*$ is a binary encoding of $M$, let
+$$
+\encoding{M,w} = 0 z_1 0 z_2 \ldots 0 z_k 1 w_1 w_2 \ldots w_n
+$$ 
+Then, $|\encoding{M,w}| = 2 |\encoding{M}| + |w| + 1$. We use 0 to separate each character in the Turing machine description, and we use 1 to separate $\encoding{M}$ and $w$.
+
+Alternatively, we can use 11 to represent 1 in the description of $\encoding{M}$, 00 to represent 0; additionally, use 01 as the delimiter separating $\encoding{M}$ and $w$. This is the encoding presented in Sipser.
+
+\begin{definition}[Shortest Description]
+    If $x \in \{0,1\}^*$, then the \textit{\textbf{shortest description}} $x$, denoted $d(x)$ is the lexicographically minimal string $\encoding{M,w}$ such that $M(w)$ halts with only $x$ on its tape.
+\end{definition}
+
+\begin{definition}[Kolmogorov Complexity]
+    The \textit{\textbf{Kolmogorov complexity}} (or descriptive complexity, Kolmogorov-Chaitin complexity) of $x$, denoted $K(x)$ is $|d(x)|$.
+\end{definition}
+
+\begin{theorem}
+    There is a constant $c$ such that for all $x \in \{0,1\}^*$,
+    $$
+    K(x) \leq |x| + c
+    $$
+\end{theorem}
+The amount of information in $x$ is not much more than $|x|$. The Kolmogorov complexity of a string is at most a fixed constant more than its length.
+
+\begin{proof}
+    Define $M$
+    
+    $M$ on input $w$, halts. On any string $x$, $M(x)$ halts with $x$ on its tape.
+    $$
+    K(x) \leq |\encoding{M,x}| \leq 2|\encoding{M}| + |x| + 1 \leq |x| + c
+    $$ 
+    So we can let $c$ be the length of the trivial Turing machine that computes the identity function.
+\end{proof}
+
+\begin{theorem}
+    There exists a constant $c$ such that for all $x \in \{0,1\}^*$,
+    $$
+    K(xx) \leq K(x) + c
+    $$
+\end{theorem}
+
+This says if a string is repetitive, such string has no more information than $x$.
+
+\begin{proof}
+    Consider the Turing machine $M$ defined as follows
+    $$
+    \begin{aligned}
+        M = ``&\text{on input $\encoding{N,w}$, where $N$ is a TM and $w$ is a string} \\
+        &\text{1. Run $N$ on $w$ until it halts and produces an output string $s$} \\
+        &\text{2. Output the string $ss$ }"
+    \end{aligned}
+    $$
+    Let $\encoding{M,w}$ be the shortest description of $x$, then $\encoding{N,\encoding{M,w}}$ is a description of $xx$.
+    $$
+    K(xx) \leq |\encoding{N,\encoding{M,w}}| \leq 2|\encoding{N}| + K(x) + 1 \leq K(x) + c
+    $$
+    So letting $c = 2|\encoding{N}| + 1$, the theorem holds.
+\end{proof}
+
+\begin{corollary}
+    There is a constant $s$ such that for all $n\geq 2$ and $x \in \{0,1\}^*$,
+    $$
+    K(x^n) \leq K(x) + c \log n
+    $$
+    In particular, $K((01)^n) \in O(\log n)$.
+\end{corollary}
+
+\begin{proof}
+    Let
+    $$
+    \begin{aligned}
+        N = `` &\text{on input $\encoding{n,\encoding{M,w}}$} \\
+        &\text{run $M(w)$ and print $x$ for $n$ times}
+        "
+    \end{aligned}
+    $$
+    If $\encoding{M,w}$ is a shortest description of $x$, then,
+    $$
+    \begin{aligned}
+        K(x^n) &\leq K(\encoding{N,\encoding{n,\encoding{M,w}}}) \\
+        &\leq 2 |\encoding{N}| + 2 \left\lceil \log n \right\rceil + | \encoding{M,w} | + 2 \\
+        &= K(x) + O(\log n)
+    \end{aligned}
+    $$
+\end{proof}
+
+\section{The Invariance Theorem}
+
+The Kolmogorov complexity of a string is independent of the model (as long as we restrict ourselves to classical computational models). The model does not matter. Turing machiens can be viewed as programming languages. If we use another programming lanuage, we will not get significantly shorter description. Intuitively, we can always write a compiler/interpreter to translate from one language to another, and the size of the compiler is constant.
+
+\begin{definition}[Interpreter]
+    An \textit{\textbf{interpreter}} is a semi-computable function $p:\; \{0,1\}^* \to \{0,1\}^*$ which takes a program as inputs and prints their outputs.
+\end{definition}
+
+Note that an interpreter is semi-computable, meaning it may not halt on all inputs.
+
+\begin{definition}
+    The shortest description of $x$ under $p$, denoted $d_p(x)$, is the lexicographically shortest string $s$ for which $p(s)=x$. We define the Kolmogorov complexity under $p$, as $K_p(x) = |d_p(x)|$.
+\end{definition}
+
+\begin{example}[Complexity under the Python interpreter]
+    For example, $d_{\mathrm{Python}}(x)$ is the shortest binary string encoding of a Python program that outputs $x$.
+\end{example}
+
+We have the following theorem.
+\begin{theorem}[Invariance Theorem]
+    For every interpreter $p$, there is a constant $c$ such that for all $x \in \{0,1\}^*$,
+    $$
+    K(x) \leq K_p(x) + c
+    $$
+    This theorem implies that we only change the Kolmogorov complexity of $x$ by a constant $c$ by using a different programming language.
+\end{theorem}
+
+\begin{proof}
+    Define the Turing machine $M$ such that
+    $$
+    \begin{aligned}
+        M = ``&\text{on input $w$} \\
+        &\text{output $p(x)$}"
+    \end{aligned}
+    $$
+    Then, $\encoding{M,d_p(x)}$ is a description of $x$. So,
+    $$
+    \begin{aligned}
+        K(x) &\leq |\encoding{M,d_p(x)}| \\
+        &\leq 2|\encoding{M}| + K_p(x) + 1 \\
+        &\leq K_p(x) + c
+    \end{aligned}
+    $$
+\end{proof}
+
+\section{Incompressible Strings}
+
+\vspace{\parskip}
+
+\begin{definition}[Incompressible Strings]
+    Let $x$ be a string. We say that $x$ is $c$-compressible if
+    $$
+    K(x) \leq |x| - c
+    $$
+    If $x$ is not $c$-compressible, we say $x$ is incompressibe by $c$. If $x$ is incompressible by 1, we say that $x$ is \textit{\textbf{incompressible}} or \textit{\textbf{Kolmogorov random}}.
+\end{definition}
+
+\begin{theorem}
+    For all $n$, there is an $x \in \{0,1\}^*$ such that $K(x) \geq n$. In other words, incompressible strings of every length exist.
+\end{theorem}
+
+\begin{proof}
+    The number of binary strings of length $n$ is equal to $2^n$. However, the number of descriptions $\encoding{M,w}$ of length $|\encoding{M,w}| < n$ is equal to
+    $$
+    1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1
+    $$
+    Therefore, there exists at least one $n$-bit string that does not have a description of length less than $n$.
+\end{proof}
+
+\begin{theorem}
+    For all $n$ and $c$,
+    $$
+    \Prob_{x \in \{0,1\}^n} \Big[ K(x) \geq n-c \Big] \geq 1 - \frac{1}{2^c}
+    $$
+    In other words, most strings are very incompressibe.
+\end{theorem}
+
+\begin{proof}
+    We assume that all strings of length $n$ are uniformly distributed. The number of descriptions of length less than $n-c$ is
+    $$
+    1 + 2 + 4 + \cdots + 2^{n-c-1} < 2^{n-c}.
+    $$
+    Recall that there are $2^n$ strings of length $n$. So, the probably of a string being $c$-compressible is $2^{n-c}/2^n = 2^{-c} = 1/2^c$. It follows that the probably of a string being $c$-incompressibe is $1 - 1/2^c$.
+\end{proof}
+
+A natural follow-up question to ask is: given a string $x$, how hard is it to find a short algorithm for generating the string? Let's look at the following numbers:
+\begin{itemize}
+    \item 10101010011110101000110010
+    \item 1235813213455891442333776
+    \item 12624120720504040320362880
+\end{itemize}
+As we can see, it seems quite hard in general to find a succinct algorithm that generates an arbitrary string. In fact, the problem of determining whether a string is compressible is undecidable, and not even recognizable.
+
+\begin{definition}[Language of Incompressible Strings]
+    Let
+    $$
+    \mathrm{INCOMP} = \{ x \in \{0,1\}^* \mid K(x) \geq |x| \}
+    $$
+    be the set of incompressibe strings.
+\end{definition}
+
+\begin{theorem}
+    INCOMP is undecidable.
+\end{theorem}
+
+Intuition: If INCOMP were decidable, then we could design an algorithm that prints the first incompressibe string of length $n$. But then, such a string can be succinct described by giving the algorithm and $n$ in binary.
+
+\begin{remark}
+    Berry's paradox: ``the smallest integer that cannot be defined in less than thirteen words''. If such integer exists, it is ``the smallest integer that cannot be defined in less than thirteen words'', but then it can be defined in twelve words.
+\end{remark}
+
+\begin{proof}
+    For contradiction, assume that $M$ is a decider for INCOMP. And let $M'$ be
+    $$
+    \begin{aligned}
+        M' = `` &\text{on input $\encoding{n}$,} \\
+        &\text{run $M$ on all $\encoding{n}$ bit strings and print the} \\
+        &\text{lexicographically first string that $M$ accepts}
+        "
+    \end{aligned}
+    $$
+    Let $s_n \in \{0,1\}^n$ be the output of $M'$ on $\encoding{n}$. Then, $\encoding{M}$ accepts $s_n$, so $s_n \in \mathrm{INCOMP}$ and $K(s_n) \geq n$.
+
+    On the other hand, $\encoding{M',\encoding{n}}$ is a description of $s_n$. Therefore,
+    $$
+    \begin{aligned}
+        K(s_n) \leq |\encoding{M',\encoding{n}}| &\leq 2 \encoding{M'} + \left\lceil \log n \right\rceil + 1 \\
+        &\leq \log n + c
+    \end{aligned}
+    $$
+    for some constant $c$. Now, choose $n$ large enough so that $\log n + c < n$. Then, $K(s_n) = \log n + c < n$. But then, since $s_n$ is in INCOMP, $K(s_n) \geq n$. Contradiction.
+\end{proof}
+
+\begin{theorem}
+    INCOMP is co-Turing recognizable, but not Turing recognizable.
+\end{theorem}
+
+The idea of the proof is similar to the proof that INCOMP is not decidable, except that we use dovetailing to prevent looping.
+
+\begin{proof}
+    We prove that INCOMP is not Turing recognizable by proving a stronger version of the theorem: every infinite subset of INCOMP is not Turing recognizable.
+
+    Let $I \subseteq \mathrm{INCOMP}$ be an infinite subset of INCOMP. Let $x_i$ denote the $i$th string in $I$. For contradiction, assume that $I$ is Turing recognizable. Then, there exists some Turing machine $M$ that recognizes $I$.
+
+    We construct a Turing machine $M'$ as follows:
+    $$
+    \begin{aligned}
+        M' = ``&\text{on input $n$,} \\
+        &\text{\textbf{for} $i=1,2,3,\ldots$} \\
+        &\text{\quad run $M$ for $i$ steps on $x_1,\ldots,x_i$ } \\
+        &\text{\quad \textbf{if} $M$ accepts $|x_j|$ for some $j\leq i$ and $|x_j| \geq n$} \\
+        &\text{\quad\quad print $x_i$ }
+        "
+    \end{aligned}
+    $$
+    The number of binary strings of a given length $n$ is finite (namely, there are $2^n$ strings of length $n$). This implies that since $I$ is infinite, there must be string of infinitely many lengths in $I$. Hence, for all $n$, there will always be some string $x$ such that $|x| \geq n$. Consider such $x$ printed by $M'$.
+
+    Since $x \in I \subseteq \mathrm{INCOMP}$, $x$ is incompressible and $K(x) \geq n$. On the other hand, $\encoding{M',\encoding{n}}$ is also a description of $x$. Hence,
+    $$
+    \begin{aligned}
+        K(x) \leq |\encoding{M',\encoding{n}} \leq 2|\encoding{M'}| + \left\lceil \log n \right\rceil + 1 \leq \log n + c
+    \end{aligned}
+    $$
+    for some constant $c$. We choose a sufficiently large $n$ such that $\log n + c < n$. Then, $K(x) = \log n + c < n$, but then since $x \in I$, $K(x) \geq n$. This is a contradiction. Therefore, $I$ is not recognizable.
+\end{proof}
