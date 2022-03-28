@@ -127,24 +127,50 @@
 \contentsline {section}{\numberline {10.4}Coloring}{59}{section.10.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {10.5}Subset Sum}{59}{section.10.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {11}Space Complexity}{61}{chapter.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11.1}Space Complexity}{61}{section.11.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11.2}Time Complexity of SPACE}{62}{section.11.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11.3}Nondeterministic Space}{62}{section.11.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11.4}Savitch's Theorem}{62}{section.11.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {11.5}PSPACE-Complete}{63}{section.11.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {11.5.1}TQBF}{64}{subsection.11.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {12}The Class L and NL}{67}{chapter.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {12.1}L and NL}{67}{section.12.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {12.2}PATH is in NL}{67}{section.12.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {12.3}NL-Complete}{68}{section.12.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {12.3.1}Log-Space Reduction}{68}{subsection.12.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {12.3.2}PATH is NL-Complete}{69}{subsection.12.3.2}%
 \ttl@stoptoc {default@3}
 \ttl@starttoc {default@4}
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{61}{section*.13}%
+\contentsline {part}{\setlength \fboxsep {0pt}\noindent \colorbox {ocre!40}{\strut \parbox [c][.7cm]{\linewidth }{\Large \sffamily \centering Appendix\hskip 1em\relax \mbox {}}}}{71}{section*.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{63}{appendix*.14}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Axioms \& Theorems}}{73}{appendix*.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{67}{appendix*.19}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Basic Prerequisite Mathematics}}{77}{appendix*.19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{73}{appendix*.20}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Proof Templates}}{83}{appendix*.20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{83}{appendix*.21}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Index}}{93}{appendix*.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{85}{appendix*.22}%
+\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{95}{appendix*.22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Courses}{85}{section*.23}%
+\contentsline {section}{Courses}{95}{section*.23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Books}{85}{section*.24}%
+\contentsline {section}{Books}{95}{section*.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Journal Articles}{86}{section*.25}%
+\contentsline {section}{Journal Articles}{96}{section*.25}%
 \contentsfinish 

@@ -1,0 +1,222 @@
+\section{Space Complexity}
+
+We define the space complexity as the largest tape index reached during the computation.
+
+\begin{definition}[Space Complexity]
+    The space complexity of $M$ is the function $f:\, \N \to \N$ where $f(n)$ is the largesttape index reached by $M$ on any input of length $n$.
+\end{definition}
+
+\begin{definition}[Space Complexity Class]
+     $$
+     \Space(f(n)) = \{ L \mid \text{$L$ is decided by a TM with $O(f(n))$ space complexity}\}
+     $$ 
+\end{definition}
+
+\begin{theorem}[3SAT is in SPACE(n)]
+    $$
+    \text{3SAT} \in \Space(n)
+    $$
+\end{theorem}
+
+\begin{proof}
+    Given 3SAT formula $\phi$ of length $n$, try all possible assignments to at most $n$ variables. Evaluate $\phi$ on each assignment. Accept if and only if there is a satisfying assignment. This can be carried out in $O(n)$ space.
+\end{proof}
+
+\begin{theorem}
+    $$
+    \NTime(t(n)) \subseteq \Space(t(n))
+    $$
+\end{theorem}
+
+\begin{definition}[PSPACE]
+    $$
+    \PSpace = \bigcup_{k \in \N} \Space(n^k)
+    $$
+\end{definition}
+
+$\PSpace$ formalizes problems solvable by computers with bounded memory. $\PSpace$ is more general because we can reuse space.
+
+Open question: $\p \overset{?}{=} \PSpace$
+
+If $\p = \PSpace$, then $\p = \NP$. 
+
+\section{Time Complexity of SPACE}
+
+Let $M$ be a Turing machine that halts with space complexity $f(n)$. How many steps could $M$ take on inputs of length $n$?
+
+Number of steps is at most number of possible configurations. Recall that a configuration encodes the head position, state, $f(n)$ cells of tape content, so the length of a configuration is in $O(f(n))$. It follows that the total number of configurations is in $O(2^{f(n)})$.
+
+Hence,
+$$
+\PSpace \subseteq \ExpTime
+$$
+
+So far, we have
+$$
+\p \subseteq \NP \subseteq \PSpace \subseteq \ExpTime
+$$
+
+\begin{theorem}
+    $$
+    \p \neq \ExpTime
+    $$
+\end{theorem}
+
+\begin{proof}
+    By the time hierarchy theorem.
+\end{proof}
+
+So, at least one of $\p \neq \NP$ and $\NP \neq \PSpace$ and $\PSpace \neq \ExpTime$ must be true.
+
+\section{Nondeterministic Space}
+
+\begin{definition}[NSPACE]
+    $$
+    \NSpace(f(n)) = \{ L \mid \text{$L$ is decided by a nondeterministic TM with $O(f(n))$ space complexity}\}
+    $$
+\end{definition}
+
+\begin{definition}[NPSPACE]
+    $$
+    \NPSpace = \bigcup_{k \in \N} \NSpace(n^k)
+    $$
+\end{definition}
+
+\section{Savitch's Theorem}
+
+\begin{theorem}[Savitch's Theorem]
+    For any function $f:\,\N \to \R^+$ where $f(n) \geq n$,
+    $$
+    \NSpace(f(n)) \subseteq \Space(f^2(n))
+    $$
+\end{theorem}
+
+\begin{proof}
+    Let $N = (Q,\Sigma,\Gamma, \delta, q_0, q_{acc}, q_{rej})$ be NTM with space complexity $f(n)$. We will construct a DTM $M$ with space complexity $O(f^2(n))$ such that $\lang(M) = \lang(N)$.
+
+    Let $w \in \Sigma^n$ be input of length $n$. We define a directed graph $G = (V,E)$ called $f(n)$ space configuration graph of $N$ where
+    $$
+    V = \{\text{configurations of $N$ with at most $f(n)$ }\}
+    $$
+
+    Observe that $w \in \lang(N)$ if and only if there exists a path in $G$ of length at most $2^{d f(n)}$ from $q_0w$ to an accepting configuration of the form $xq_{acc}y$.
+
+    \begin{codebox}
+        \Procname{$\proc{Can-Yield}(c_1,c_2,t)$}
+        \li \If $t \isequal 1$ \Then
+            \li \If $c_1$ yields $c_2$ \Then
+                \li \textbf{accept}
+            \li \Else \textbf{reject}
+            \End
+        \End
+        \li \If $t \geq 2$ \Then
+            \li \For $c_3 \in V$ in order \Do
+                \li $\proc{Can-Yield}(c_1,c_3,\lceil t/2 \rceil )$ 
+                \li $\proc{Can-Yield}(c_3,c_2,\lfloor t/2 \rfloor )$
+                \li \If both accept for some $c_3$ \Then
+                    \li \textbf{accept}
+                \li \Else \textbf{reject}
+    \end{codebox}
+
+\begin{turing}{M}{on input $w$ of length $n$}
+    \item \textbf{for each} $c \in V$ in orders
+    \item \qquad \textbf{if} $c$ is an accepting configuration
+    \item \qquad \qquad run $\proc{Can-Yield}(q_0w, c, 2^{df(n)})$ 
+    \item \qquad \qquad \textbf{if} it accepts then \textbf{accept}
+    \item \qquad \qquad \textbf{else} \textbf{continue}
+    \item \qquad \textbf{if} $\proc{Can-Yield}(q_0w, c, 2^{df(n)})$ rejects for every accepting configuration $c \in V$, \textbf{reject}
+\end{turing}
+
+\end{proof}
+
+Thus, by Savitch's theorem
+$$
+\PSpace = \NPSpace
+$$
+We can simulate any $\NPSpace$ Turing machine using a deterministic TM with only a quadratic overhead.
+
+\section{PSPACE-Complete}
+
+\begin{definition}[PSPACE-Complete]
+    Language $B$ is $\PSpace$-complete if
+    \begin{enumerate}
+        \item $B$ is in $\PSpace$
+        \item Every $A$ in $\PSpace$ is \textbf{poly-time} reducible to $B$ (i.e. $B$ is $\PSpace$-hard)
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    If $B$ is $\PSpace$-complete and $B$ is in $\p$, then $\p = \PSpace$.
+\end{theorem}
+
+\begin{proof}[Proof idea]
+    Let $A \in \PSpace$. The poly-time TM for $A$ first reduces input $x$ to an instance $y$ of $B$. Then it runs the polytime TM for $B$ on $y$ and outputs the answer.
+\end{proof}
+
+\begin{theorem}
+    If $B$ is $\NPSpace$-complete and $B$ is in $\NP$, then $\NP = \PSpace$.
+\end{theorem}
+
+\subsection{TQBF}
+
+\vspace{\parskip}
+
+\begin{definition}[Fully Quantified Boolean Formula]
+    A \textit{\textbf{fully quantified Boolean formula}} is a Boolean formula where every variable in the formula is quantified ($\exists$ or $\forall$). If all quantifiers appear at the beginning of the statement and that each quantifier's scope is everything following it, we say the statement is in \textit{\textbf{prenex normal form}} (PNF).
+\end{definition}
+
+$$
+\text{TQBF} = \{\encoding{\phi} \mid \text{$\phi$ is a true fully quantified Boolean formula}\}
+$$
+
+\begin{theorem}
+    TQBF is $\PSpace$-complete.
+\end{theorem}
+
+Note that SAT is a special case where all quantifiers are $\exists$. And TAUT is a special case where all quantifiers are $\forall$.
+
+TAUT is a special case where all quantifiers are $\forall$. So clearly, SAT $\leq_p$ TQBF and TAUT $\leq_p$ TQBF.
+
+\begin{theorem}[Meyer-Stockmeyer]
+    TQBF is $\PSpace$-complete.
+\end{theorem}
+
+\begin{proof}
+    We need to show two things: (1) TQBF is in $\PSpace$; and (2) TQBF is $\PSpace$-hard.
+
+    We show that TQBF $\in \PSpace$. Consider the Turing machine $T$ that decides TQBF.
+
+    \begin{turing}{T}{on input $\encoding{\phi}$}
+        \item if $\phi$ has no quantifiers, evaluate $\phi$. Accept if it evaluates to 1.
+        \item If $\phi = \exists x.\, \psi$, recursively call $T$ on $\psi$, first with $x=0$ and then $x=1$. If either result is accept, then accept; otherwise reject.
+        \item If $\phi = \forall x.\, \psi$, recursively call $T$ on $\psi$ first with $x=0$ and then $x=1$. If both results are accept, then accept; otherwise reject.
+    \end{turing}
+
+    Note that we can reuse space. The depth of recursion is number of variables. At each level, we just need to store value of one variable. Hence, the space used is in $O(m)$ where $m$ is the number of variables.
+
+    To show that TQBF is $\PSpace$-hard, we show that for all $A \in \PSpace$, $A \leq_p$ TQBF.
+
+    For every $A \in \PSpace$, there exists some constant $k$ and Turing machine $M$ that decides $A$ in space of at most $n^k$. However, $M$ may run exponentially many steps, so simply encoding the computation history tableau directly won't work because we cannot construct an exponentially-sized formula in polynomial time.
+
+    Fix $M$ and $w$, we will construct a quantified Boolean formula $\phi$ such that $\text{$M$ accepts $w$} \iff \text{$\phi$ is true}$. We will actually show how to construct $\phi_{c_1,c_2,t}$ to be a formula that is true if and only if $M$ can go from configuration $c_1$ and $c_2$ in at most $t$ steps. Note that in the construction that follows, $c_1,c_2,m_1$ are not necessarily one single variable, but collections of variables that represent some configurations. We can encode a configuration using $l \in O(n^k)$ variables from the proof of Cook-Levin's theorem.
+
+    When $t=1$, it is easy to construct $\phi_{c_1,c_2,1}$. This translates to ``$c_2$ follows from $c_1$''. This is essentially the same construction used in the proof of Cook-Levin theorem.
+
+    When $t > 1$, we construct $\phi_{c_1,c_2,t}$ recursively.
+    $$
+    \phi_{c_1,c_2,t} = \exists m_1.\, [\phi_{c_1,m_1,t/2} \land \phi_{m_1,c_2,t/2}]
+    $$
+    where $m_1$ represents variables describing a configuration of $M$. Notice, however, at each stage, the size of the formula doubles. This will lead to an exponential explosion of the size of the formula. In the end, we would have a formula of size in the order of $t = 2^{dn^k}$.
+
+    Instead, we use a clever construction:
+    $$
+    \phi_{c_1,c_2,t} = \exists m_1.\, \forall c_3,c_4.\, [ (c_3,c_4) = (c_1,m_1) \lor (c_3,c_4) = (m_1,c_2) \implies \phi_{c_3,c_4,t/2} ]
+    $$
+    This construction essentially says: ``for all variables $c_3,c_4$ encoding a configuration, if $c_3,c_4$ represents $c_1,m_1$, then $\phi_{c_3,c_4,t/2}$ must be true; and the same is true for the case when $c_3,c_4$ represents $c_1,m_1$''.
+
+    With this construction, the size of the formula increases at most by an additive factor of size $O(n^k)$. At the end, following the recursive construction described as above, we have 
+    $$
+    \phi_{c_{start},c_{end},2^{d^{n^k}}}
+    $$
+    The level of recursion is $\log(2^{dn^k})$ and each level of recursion adds a portion of the formula with size linear in the size of the variables encoding a configuration, which is in $O(n^k)$. Therefore, in the end, the size of the formula is $O(n^{2k})$, polynomial in the input size.
+\end{proof}

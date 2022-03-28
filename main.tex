@@ -117,6 +117,14 @@
 \newcommand{\FP}{\mathsf{FP}}
 \newcommand{\Time}{\mathsf{TIME}}
 \newcommand{\NTime}{\mathsf{NTIME}}
+\newcommand{\ExpTime}{\mathsf{EXPTIME}}
+\newcommand{\Space}{\mathsf{SPACE}}
+\newcommand{\NSpace}{\mathsf{NSPACE}}
+\newcommand{\PSpace}{\mathsf{PSPACE}}
+\newcommand{\NPSpace}{\mathsf{NPSPACE}}
+\newcommand{\LSpace}{\mathsf{L}}
+\newcommand{\NLSpace}{\mathsf{NL}}
+\newcommand{\ExpSpace}{\mathsf{EXPSPACE}}
 \newcommand{\NP}{\mathsf{NP}}
 \newcommand{\TM}{\mathsf{TM}}
 \newcommand{\LBA}{\mathsf{LBA}}
@@ -143,6 +151,20 @@
         at=(#3.#1), anchor=#1+180, shift=(#1:#2)
     }
 }
+
+\newenvironment{turing}[2]
+ {\begin{enumerate}[leftmargin=0pt,labelsep=0pt,align=left,parsep=0pt]
+  \item[$#1={}$]``\ignorespaces#2
+  \begin{enumerate}[
+    nosep,
+    align=left,
+    labelwidth=1.5em,
+    label=\arabic{*}.,
+    ref=\arabic{*}
+  ]}
+ {\unskip''\end{enumerate}\end{enumerate}}
+
+\newcommand{\bitem}{\item\hspace*{1em}\ignorespaces}
 
 \definecolor{ppurple}{RGB}{189,16,224}
 
@@ -234,6 +256,12 @@ The cover depicts a Turing machine. Turing machine is a simple but powerful comp
 
 \chapter{NP-Complete Problems}
 \input{notes/np-complete.tex}
+
+\chapter{Space Complexity}
+\input{notes/space.tex}
+
+\chapter{The Class L and NL}
+\input{notes/logspace.tex}
 
 %----------------------------------------------------------------------------------------
 %	APPENDIX
